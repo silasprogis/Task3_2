@@ -48,7 +48,7 @@ class MainKtTest {
         checkLimitsVisaMir()
 
         // assert
-        assertEquals(checkLimitsVisaMir(),"Перевод на сумму 150000 р. принят. Комиссия 112500.0 коп.")
+        assertEquals(checkLimitsVisaMir(),"Перевод на сумму 150000 р. принят. Комиссия 112500.0 коп")
     }
 
 }
