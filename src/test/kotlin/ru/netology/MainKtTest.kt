@@ -39,4 +39,16 @@ class MainKtTest {
 
 
     }
+    @Test
+    fun checkLimitsVisaMir_is_correct() {
+        // arrange
+        val cardType = "Visa"
+
+        // act
+        checkLimitsVisaMir()
+
+        // assert
+        assertEquals(checkLimitsVisaMir(),"Перевод на сумму 150000 р. принят. Комиссия 112500.0 коп.")
+    }
+
 }
