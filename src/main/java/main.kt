@@ -10,18 +10,21 @@ val limitVkpayOnce = 1500000
 val limitVkpayMonth = 4000000
 
 fun main () {
-    print(isDiscount(cardType))
+    print(isDiscount(cardType, transaction, limitVkpayOnce, monthTransactions, limitVkpayMonth,
+        limitCardPerDay, limitCardPerMonth, limitMasterMaestro))
 }
 
-fun isDiscount (cardType: String):String {
+fun isDiscount (cardType: String, transaction: Int, limitVkpayOnce: Int, monthTransactions: Int, limitVkpayMonth: Int,
+                limitCardPerDay: Int, limitCardPerMonth: Int, limitMasterMaestro: Int):String {
     when (cardType) {
-        "Visa", "Мир" -> return checkLimitsVisaMir()
-        "Mastercard", "Maestro" ->return checkLimitsMasterMaestro()
-        else ->return checkLimitsVkpay()
+        "Visa", "Мир" -> return checkLimitsVisaMir(transaction, limitCardPerDay, monthTransactions, limitCardPerMonth)
+        "Mastercard", "Maestro" ->return checkLimitsMasterMaestro(transaction,limitCardPerDay, monthTransactions,
+            limitCardPerMonth, limitMasterMaestro)
+        else ->return checkLimitsVkpay(transaction, limitVkpayOnce, monthTransactions, limitVkpayMonth)
     }
 
 }
-fun checkLimitsVkpay (): String {
+fun checkLimitsVkpay (transaction: Int, limitVkpayOnce: Int, monthTransactions: Int, limitVkpayMonth: Int): String {
     if (transaction > limitVkpayOnce && monthTransactions < limitVkpayMonth) {
         println("Сумма привышает лимит на разовый перевод. Сумма максимального разового перевода 15000р")
         return "Сумма привышает лимит на разовый перевод. Сумма максимального разового перевода 15000р"
@@ -34,7 +37,12 @@ fun checkLimitsVkpay (): String {
     }
 }
 
-fun checkLimitsMasterMaestro (): String {
+fun checkLimitsMasterMaestro (
+    transaction: Int,
+    limitCardPerDay: Int,
+    monthTransactions: Int,
+    limitCardPerMonth: Int,
+    limitMasterMaestro: Int): String {
     if (transaction > limitCardPerDay && monthTransactions < limitCardPerMonth) {
         println("Сумма привышает лимит на ежедневный перевод. Лимит в день 150000р")
         return "Сумма привышает лимит на ежедневный перевод. Лимит в день 150000р"
@@ -51,7 +59,7 @@ fun checkLimitsMasterMaestro (): String {
     }
 }
 
-fun checkLimitsVisaMir (): String {
+fun checkLimitsVisaMir (transaction: Int, limitCardPerDay: Int, monthTransactions: Int, limitCardPerMonth: Int): String {
     if (transaction > limitCardPerDay && monthTransactions < limitCardPerMonth) {
         println("Сумма привышает лимит на ежедневный перевод. Лимит в день 150000р")
         return "Сумма привышает лимит на ежедневный перевод. Лимит в день 150000р"
