@@ -10,7 +10,7 @@ class MainKtTest {
     fun isDiscount_card_correct() {
         // arrange
         val test_cardType = "Maestro"
-        val test_transaction = 1500000
+        val test_transaction = 1500000000
         val test_monthTransactions = 300000
         val test_limitVkpayOnce = 1500000
         val test_limitVkpayMonth = 4000000
